@@ -1,0 +1,67 @@
+name: now
+description: GitHub action which runs zeit's now
+
+inputs:
+  token:
+    required: true
+    description: Zeit API token (set in secrets and use interpolation to include it)
+  name:
+    required: false
+    description: Name of the project (recommended to set inside the now.json file)
+  scope:
+    required: false
+    description: Scope (or team slug) for the deployment (recommended to set inside the now.json file)
+  regions:
+    required: false
+    description: Regions for the deployment (recommended to set inside the now.json file)
+  path:
+    required: false
+    description: Custom path to deploy (instead of .)
+  prod:
+    required: false
+    description: If true, then will deploy production and alias to the configured production aliases
+    default: false
+  public:
+    required: false
+    description: If true, then the source code of the deployment will be publically viewable
+    default: false
+  force:
+    required: false
+    description: If true, then will deploy even when the source code hasn't changed
+    default: false
+  build_env:
+    required: false
+    description: ENV variables to export at build time in '.env' style with KEY=value per-line
+  env:
+    required: false
+    description: ENV variables to export at run time in '.env' style with KEY=value per-line
+  meta:
+    required: false
+    description: Add KEY=value metadata in '.env' style with KEY=value per-line
+  debug:
+    required: false
+    description: If true, then output debugging information
+    default: false
+
+outputs:
+  deployment_url:
+    description: URL to the dashboard page for this deployment
+  deployment_id:
+    description: ID of the deployment
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    INPUT_TOKEN: ${{ inputs.token }}
+    INPUT_NAME: ${{ inputs.name }}
+    INPUT_SCOPE: ${{ inputs.scope }}
+    INPUT_REGIONS: ${{ inputs.regions }}
+    INPUT_PATH: ${{ inputs.path }}
+    INPUT_PROD: ${{ inputs.prod }}
+    INPUT_PUBLIC: ${{ inputs.public }}
+    INPUT_FORCE: ${{ inputs.force }}
+    INPUT_BUILD_ENV: ${{ inputs.build_env }}
+    INPUT_ENV: ${{ inputs.env }}
+    INPUT_DEBUG: ${{ inputs.debug }}
+

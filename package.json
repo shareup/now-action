@@ -1,0 +1,39 @@
+{
+  "name": "now-action",
+  "version": "0.0.1",
+  "description": "GitHub action which runs zeit's now",
+  "main": "index.ts",
+  "repository": "https://github.com/shareup/now-action",
+  "author": "Nathan Herald <nathan@shareup.app>",
+  "license": "MIT",
+  "eslintConfig": {
+    "rules": {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "error"
+    }
+  },
+  "standardx": {
+    "ignore": [
+      "dist"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ]
+  },
+  "scripts": {
+    "lint": "standardx **/*.ts && hadolint Dockerfile",
+    "package": "ncc build index.ts -o dist -s"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
+    "@zeit/ncc": "^0.21.0",
+    "standardx": "^5.0.0"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.1",
+    "@actions/exec": "^1.0.3",
+    "dotenv": "^8.2.0"
+  }
+}
