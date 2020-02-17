@@ -1655,6 +1655,7 @@ async function deploy() {
     const args = [];
     args.push(`--token=${token}`);
     args.push('--no-clipboard');
+    args.push('--confirm');
     if (name) {
         args.push(`--name=${name}`);
     }

@@ -80,6 +80,7 @@ async function deploy (): Promise<string> {
 
   args.push(`--token=${token}`)
   args.push('--no-clipboard')
+  args.push('--confirm')
 
   if (name) {
     args.push(`--name=${name}`)
